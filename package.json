@@ -155,5 +155,10 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "@tensferhq/tensfer-js": "^2.3.5",
+    "react-native-root-siblings": "^5.0.1",
+    "react-native-webview": "^13.8.4"
   }
 }

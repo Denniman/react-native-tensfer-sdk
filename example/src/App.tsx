@@ -1,31 +1,60 @@
-import * as React from 'react';
+import React from 'react';
+import {
+  View,
+  Text,
+  Alert,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-tensfer-sdk';
+import Tensfer from './Tensfer';
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+function Example() {
+  const onClose = () => Alert.alert('Modal Closed');
 
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const onSuccess = (data: any) => {
+    Alert.alert('Successful!!!');
+    console.log('', data);
+  };
+
+  const onError = (error: any) => {
+    Alert.alert('An Error occured');
+    console.log(error);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            Tensfer.linkWithOptions({
+              onClose,
+              onError,
+              onSuccess,
+              publicKey: 'test_pk_29ed7fc34563d819b91f',
+            })
+          }
+        >
+          <Text>Test with options</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 
+export default function App() {
+  return <Example />;
+}
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  button: {
+    height: 40,
+    borderRadius: 16,
+    marginVertical: 16,
     alignItems: 'center',
+    backgroundColor: 'green',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
   },
 });
