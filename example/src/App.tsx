@@ -1,4 +1,5 @@
 import React from 'react';
+import { RootSiblingParent } from 'react-native-root-siblings';
 import {
   View,
   Text,
@@ -45,7 +46,11 @@ function Example() {
 }
 
 export default function App() {
-  return <Example />;
+  return (
+    <RootSiblingParent>
+      <Example />
+    </RootSiblingParent>
+  );
 }
 
 const styles = StyleSheet.create({
